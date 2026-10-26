@@ -1,0 +1,25 @@
+=== AES-256-GCM theo khối 1 MB, file lớn ===
+    MB    enc s    dec s  enc MB/s  dec MB/s identical
+    10     0.01     0.01       831      1490 True
+   giả mạo: phát hiện, từ chối giải mã (InvalidTag) - đúng như mong đợi
+   100     0.11     0.12       891       832 True
+   500     0.54     1.69       929       296 True
+  2000     3.33     2.17       601       922 True
+
+=== RSA-OAEP-SHA384 / PSS-SHA384, 32 byte ===
+ bits  e bit  d bit    enc ms    dec ms   sign ms    ver ms  dec/enc
+ 2048     17   2046    0.0518    0.4249    0.4097    0.0552      8.2
+ 3072     17   3069    0.0685    1.0133    0.9967    0.0617     14.8
+ 4096     17   4092    0.0944    1.8468    1.9406    0.1008     19.6
+Giới hạn OAEP-SHA384 với 2048 bit: 158 byte; thử 158 byte: OK; 159 byte: bị từ chối
+
+=== SHA-512 avalanche (đổi 1 bit của đầu vào 128 byte, 10000 lần) ===
+trung bình 256.11/512 bit (50.02%), min 212, max 301
+Bonjour: c447dff0d671f62ad580b255b64f7a8f6a30d1b828569cee08b7c861239f8d48...
+Bonjous: 2827e7edb13cdd40c1c54d3d5a8b0efc047c0d2d34c2ea222d687df35b41d2c4...
+
+=== Chữ ký: PKCS#1 v1.5 vs PSS (SHA-384), cùng dữ liệu, cùng khóa, 5 lần ===
+PKCS#1 v1.5: số chữ ký khác nhau = 1 / 5
+PSS        : số chữ ký khác nhau = 5 / 5
+PSS: cả 5 chữ ký xác minh đúng = True
+sửa dữ liệu: xác minh thất bại (đúng như mong đợi)

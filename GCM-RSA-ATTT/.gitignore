@@ -1,0 +1,16 @@
+## .NET
+bin/
+obj/
+*.user
+.vs/
+.vscode/
+
+## Dữ liệu sinh ra khi chạy thử - KHÔNG đưa lên GitHub (có chứa khóa bí mật)
+*.pem
+*.key
+*.b64
+*.sec
+*.out
+*.bad
+gcm_test/
+mau.txt
